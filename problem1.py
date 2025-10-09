@@ -3,8 +3,10 @@ Problem 1: List Operations and Comprehensions
 Practice working with Python lists - creating, modifying, filtering, and transforming them.
 """
 
+list = []
 
 def create_number_list(start, end):
+    
     """
     Create a list of numbers from start to end (inclusive).
 
@@ -19,12 +21,21 @@ def create_number_list(start, end):
         >>> create_number_list(1, 5)
         [1, 2, 3, 4, 5]
     """
-    # TODO: Implement this function
-    # Hint: Use range() and convert to list
-    pass
 
+    start = int(start)
+    end = int(end)
+
+    for i in range(start, end + 1):
+        list.append(i)
+    
+    return list
+
+
+even_numbers = []
 
 def filter_even_numbers(numbers):
+    
+    
     """
     Return a new list containing only the even numbers.
 
@@ -38,12 +49,19 @@ def filter_even_numbers(numbers):
         >>> filter_even_numbers([1, 2, 3, 4, 5, 6])
         [2, 4, 6]
     """
-    # TODO: Implement this function
-    # You can use a loop or list comprehension
-    pass
 
+    for i in numbers:
+        if i % 2 == 0:
+            even_numbers.append(i)
+    
+    return even_numbers
+
+
+squared_numbers = []
 
 def square_numbers(numbers):
+   
+   
     """
     Return a new list with each number squared.
 
@@ -57,12 +75,14 @@ def square_numbers(numbers):
         >>> square_numbers([1, 2, 3, 4])
         [1, 4, 9, 16]
     """
-    # TODO: Implement this function
-    # Hint: Try a list comprehension!
-    pass
-
+    for i in numbers:
+        i = i**2
+        squared_numbers.append(i)
+    
+    return squared_numbers
 
 def find_max_min(numbers):
+    
     """
     Find the maximum and minimum values in a list.
 
@@ -76,12 +96,19 @@ def find_max_min(numbers):
         >>> find_max_min([3, 1, 4, 1, 5, 9, 2, 6])
         (9, 1)
     """
-    # TODO: Implement this function
-    # You can use max() and min() built-in functions
-    pass
 
+    maximum_minimum = (numbers)
+    
+    for i in maximum_minimum:
+        max_value = max(numbers)
+        min_value = min(numbers)
+    
+    return (max_value, min_value)
+
+list_no_duplicates = []
 
 def remove_duplicates(items):
+   
     """
     Remove duplicate items from a list while preserving order.
 
@@ -95,13 +122,22 @@ def remove_duplicates(items):
         >>> remove_duplicates([1, 2, 2, 3, 4, 3, 5])
         [1, 2, 3, 4, 5]
     """
-    # TODO: Implement this function
-    # Hint: You can use a loop and check if item is already in result list
-    # Or convert to set and back to list (but this doesn't preserve order)
-    pass
+   
+    for i in items:
+        
+        if i not in list_no_duplicates:
+            list_no_duplicates.append(i)
+        else:
+            pass
+
+    return list_no_duplicates
 
 
 def merge_lists(list1, list2):
+
+    longest_list = max(len(list1), len(list2))
+    merged_list = []
+
     """
     Merge two lists, alternating elements from each.
     If one list is longer, append remaining elements.
@@ -119,12 +155,24 @@ def merge_lists(list1, list2):
         >>> merge_lists([1, 2], [10, 20, 30, 40])
         [1, 10, 2, 20, 30, 40]
     """
-    # TODO: Implement this function
-    # Hint: Use a loop with index, handle different lengths
-    pass
+    for i in range(longest_list):
+        
+        if i < len(list1):
+            merged_list.append(list1[i])
+        if i < len(list2):
+            merged_list.append(list2[i])
+           
+    return merged_list
 
 
 def list_statistics(numbers):
+    dict = {}
+    dict["sum"] = sum(numbers)
+    dict["average"] = sum(numbers)/len(numbers)
+    dict["count"] = len(numbers)
+    dict["max"] = max(numbers)
+    dict["min"] = min(numbers)
+
     """
     Calculate statistics for a list of numbers.
 
@@ -138,8 +186,12 @@ def list_statistics(numbers):
         >>> list_statistics([1, 2, 3, 4, 5])
         {'sum': 15, 'average': 3.0, 'count': 5, 'max': 5, 'min': 1}
     """
+    
     if not numbers:
         return None
+    else:
+        return dict
+
 
     # TODO: Implement this function
     # Calculate and return a dictionary with the statistics
@@ -147,6 +199,8 @@ def list_statistics(numbers):
 
 
 def chunk_list(items, chunk_size):
+    new_list = []
+
     """
     Split a list into chunks of specified size.
 
@@ -161,9 +215,12 @@ def chunk_list(items, chunk_size):
         >>> chunk_list([1, 2, 3, 4, 5, 6, 7], 3)
         [[1, 2, 3], [4, 5, 6], [7]]
     """
-    # TODO: Implement this function
-    # Hint: Use list slicing in a loop
-    pass
+
+    for i in range(0,len(items),chunk_size):
+        chunk = items[i:i+chunk_size]
+        new_list.append(chunk)
+    
+    return new_list
 
 
 # Test cases
