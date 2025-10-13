@@ -3,8 +3,17 @@ Problem 2: Dictionary Operations and Nested Structures
 Practice working with Python dictionaries - creating, accessing, modifying, and nesting them.
 """
 
+import string
 
 def create_student_record(name, age, major, gpa):
+    student_file = {}
+    student_file["name"] = name
+    student_file["age"] = int(age)
+    student_file["major"] = major
+    student_file["gpa"] = float(gpa)
+
+    return student_file
+
     """
     Create a student record as a dictionary.
 
@@ -21,12 +30,12 @@ def create_student_record(name, age, major, gpa):
         >>> create_student_record("Alice", 20, "Computer Science", 3.8)
         {'name': 'Alice', 'age': 20, 'major': 'Computer Science', 'gpa': 3.8}
     """
-    # TODO: Implement this function
-    # Return a dictionary with the provided information
-    pass
 
 
-def get_value_safely(dictionary, key, default=None):
+def get_value_safely(dictionary, key, default = None):
+    
+    return dictionary.get(key, default)
+
     """
     Get a value from a dictionary safely, returning default if key doesn't exist.
 
@@ -45,12 +54,13 @@ def get_value_safely(dictionary, key, default=None):
         >>> get_value_safely(d, 'c', 'Not found')
         'Not found'
     """
-    # TODO: Implement this function
-    # Hint: Use the .get() method or check if key in dictionary
-    pass
 
 
 def merge_dictionaries(dict1, dict2):
+    
+    dictionaries_combined = dict1 | dict2
+    return dictionaries_combined
+
     """
     Merge two dictionaries. If keys conflict, dict2's values take precedence.
 
@@ -65,12 +75,14 @@ def merge_dictionaries(dict1, dict2):
         >>> merge_dictionaries({'a': 1, 'b': 2}, {'b': 3, 'c': 4})
         {'a': 1, 'b': 3, 'c': 4}
     """
-    # TODO: Implement this function
-    # Create a new dictionary with items from both
-    pass
 
 
 def count_word_frequency(text):
+    
+    word_occurrence = {}
+    new_text = text.lower()
+    
+
     """
     Count the frequency of each word in a text string.
     Convert to lowercase and ignore punctuation.
@@ -85,16 +97,20 @@ def count_word_frequency(text):
         >>> count_word_frequency("hello world hello")
         {'hello': 2, 'world': 1}
     """
-    # TODO: Implement this function
-    # Steps:
-    # 1. Convert text to lowercase
-    # 2. Remove punctuation (you can use .replace() or import string)
-    # 3. Split into words
-    # 4. Count each word's frequency
-    pass
+    
+    for c in string.punctuation:
+        no_punctuation_text = new_text.replace(c, " ")
+
+    for w in no_punctuation_text.split():
+        word_occurrence[w] = no_punctuation_text.count(w)
+        
+    return word_occurrence
 
 
 def invert_dictionary(dictionary):
+
+    inverted_dict = {}
+
     """
     Invert a dictionary (swap keys and values).
     Assume all values are unique.
@@ -109,12 +125,17 @@ def invert_dictionary(dictionary):
         >>> invert_dictionary({'a': 1, 'b': 2, 'c': 3})
         {1: 'a', 2: 'b', 3: 'c'}
     """
-    # TODO: Implement this function
-    # Create a new dictionary with values as keys and keys as values
-    pass
+
+    for keys, values in dictionary.items():
+        inverted_dict[values] = keys
+
+    return inverted_dict
 
 
 def filter_dictionary(dictionary, keys_to_keep):
+    
+    specified_dictionary = {}
+
     """
     Create a new dictionary with only the specified keys.
 
@@ -129,12 +150,19 @@ def filter_dictionary(dictionary, keys_to_keep):
         >>> filter_dictionary({'a': 1, 'b': 2, 'c': 3, 'd': 4}, ['a', 'c'])
         {'a': 1, 'c': 3}
     """
-    # TODO: Implement this function
-    # Loop through keys_to_keep and add them to result if they exist
-    pass
+
+    for i in keys_to_keep:
+        if i in dictionary:
+            specified_dictionary[i] = dictionary.get(i)
+
+    return specified_dictionary
 
 
 def group_by_first_letter(words):
+    
+    initials = []
+    grouped_words = {}
+
     """
     Group words by their first letter.
 
@@ -148,15 +176,17 @@ def group_by_first_letter(words):
         >>> group_by_first_letter(['apple', 'banana', 'apricot', 'blueberry'])
         {'a': ['apple', 'apricot'], 'b': ['banana', 'blueberry']}
     """
-    # TODO: Implement this function
-    # For each word:
-    #   - Get first letter
-    #   - Add word to the list for that letter
-    # Hint: Use .setdefault() or check if key exists
-    pass
+    
+    for w in words:
+        initials = w[0]
+        grouped_words.setdefault(initials,[]).append(w)
+
+    return grouped_words
 
 
 def calculate_grades_average(students):
+    average_grades = {}
+
     """
     Calculate the average grade for each student.
 
@@ -176,22 +206,31 @@ def calculate_grades_average(students):
         {'Alice': 87.67, 'Bob': 77.67}
     """
     # TODO: Implement this function
-    # For each student, calculate average of their grades
-    # Hint: sum(grades) / len(grades)
-    pass
+    # Start with data, then traverse using each key
+    # Return None if any key is missing
+    
+    for student, grades in students.items():
+        if grades:
+            average = round(sum(grades) / len(grades), 2)
+        else:
+            average = 0.0
+        average_grades[student] = average
+    
+    return average_grades
 
 
 def nested_dict_access(data, keys):
+    current_level = data
+
     """
     Access a nested dictionary using a list of keys.
-    Return None if any key doesn't exist.
 
     Args:
         data (dict): Nested dictionary
         keys (list): List of keys to traverse
 
     Returns:
-        Value at the nested location, or None if not found
+        The value at the nested location, or None if any key is missing
 
     Example:
         >>> data = {'a': {'b': {'c': 123}}}
@@ -200,11 +239,13 @@ def nested_dict_access(data, keys):
         >>> nested_dict_access(data, ['a', 'x'])
         None
     """
-    # TODO: Implement this function
-    # Start with data, then traverse using each key
-    # Return None if any key is missing
-    pass
 
+    for key in keys:
+        if isinstance(current_level, dict) and key in current_level:
+            current_level = current_level[key]
+        else:
+            return None
+    return current_level
 
 # Test cases
 if __name__ == "__main__":
