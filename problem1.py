@@ -3,10 +3,9 @@ Problem 1: List Operations and Comprehensions
 Practice working with Python lists - creating, modifying, filtering, and transforming them.
 """
 
-list = []
+# Removed unnecessary global list
 
 def create_number_list(start, end):
-    
     """
     Create a list of numbers from start to end (inclusive).
 
@@ -24,18 +23,13 @@ def create_number_list(start, end):
 
     start = int(start)
     end = int(end)
-
+    number_list = []
     for i in range(start, end + 1):
-        list.append(i)
-    
-    return list
-
-
-even_numbers = []
+        number_list.append(i)
+    return number_list
+    return number_list
 
 def filter_even_numbers(numbers):
-    
-    
     """
     Return a new list containing only the even numbers.
 
@@ -49,19 +43,13 @@ def filter_even_numbers(numbers):
         >>> filter_even_numbers([1, 2, 3, 4, 5, 6])
         [2, 4, 6]
     """
-
+    even_numbers = []
     for i in numbers:
         if i % 2 == 0:
             even_numbers.append(i)
-    
     return even_numbers
 
-
-squared_numbers = []
-
 def square_numbers(numbers):
-   
-   
     """
     Return a new list with each number squared.
 
@@ -75,10 +63,9 @@ def square_numbers(numbers):
         >>> square_numbers([1, 2, 3, 4])
         [1, 4, 9, 16]
     """
+    squared_numbers = []
     for i in numbers:
-        i = i**2
-        squared_numbers.append(i)
-    
+        squared_numbers.append(i**2)
     return squared_numbers
 
 def find_max_min(numbers):
@@ -105,10 +92,7 @@ def find_max_min(numbers):
     
     return (max_value, min_value)
 
-list_no_duplicates = []
-
 def remove_duplicates(items):
-   
     """
     Remove duplicate items from a list while preserving order.
 
@@ -122,14 +106,11 @@ def remove_duplicates(items):
         >>> remove_duplicates([1, 2, 2, 3, 4, 3, 5])
         [1, 2, 3, 4, 5]
     """
-   
-    for i in items:
-        
-        if i not in list_no_duplicates:
-            list_no_duplicates.append(i)
-        else:
-            pass
-
+    list_no_duplicates = []
+    for item in items:
+        if item not in list_no_duplicates:
+            list_no_duplicates.append(item)
+    return list_no_duplicates
     return list_no_duplicates
 
 
@@ -195,7 +176,7 @@ def list_statistics(numbers):
 
     # TODO: Implement this function
     # Calculate and return a dictionary with the statistics
-    pass
+
 
 
 def chunk_list(items, chunk_size):
